@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo1.models.ShippingAndProductModel;
 import com.example.demo1.models.ShippingModel;
+import com.example.demo1.services.ShippingAndProductService;
 import com.example.demo1.services.ShippingService;
 
 @RestController
@@ -20,18 +22,23 @@ import com.example.demo1.services.ShippingService;
 public class ShippingController {
     
     @Autowired
-    ShippingService ShippingService;
+    ShippingService shippingService;
+
+    @Autowired 
+    ShippingAndProductService shippingAndProductService;
 
     @GetMapping("/{id}")
-    public Optional<ShippingModel> getShippingById(@PathVariable("id") Integer id){
-        return this.ShippingService.getShippingById(id);
+    public ShippingAndProductModel getShippingAndProductsById(@PathVariable("id") Integer id){
+        return shippingAndProductService.getShippingAndProducts(id);
     }
 
     @PatchMapping("/{id}")
     public Optional<ShippingModel> changeShippingStatus(@PathVariable("id") Integer id, @RequestBody Map<Object, Object> fields){
         String statusNew = (String) fields.get("transition");
-        return this.ShippingService.changeStatus(id, statusNew);
+        return this.shippingService.changeStatus(id, statusNew);
     }
+
+    
 
 
 }

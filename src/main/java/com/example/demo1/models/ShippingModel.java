@@ -50,6 +50,5 @@ public class ShippingModel {
     public void setPriority(int priority) {
         this.priority = priority;
     }
-
     
 }   
