@@ -18,7 +18,7 @@ import com.example.demo1.services.ShippingAndProductService;
 import com.example.demo1.services.ShippingService;
 
 @RestController
-@RequestMapping("/Shipping")
+@RequestMapping("/shippings")
 public class ShippingController {
     
     @Autowired

@@ -12,7 +12,7 @@ import com.example.demo1.models.CustomerModel;
 import com.example.demo1.services.CustomerService;
 
 @RestController
-@RequestMapping("/Customer")
+@RequestMapping("/customers")
 public class CustomerController {
     
     @Autowired
