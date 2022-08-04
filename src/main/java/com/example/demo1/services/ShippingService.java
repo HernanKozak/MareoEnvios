@@ -34,7 +34,7 @@ public class ShippingService {
                     if(statusNew.equals("sendToMail")){
                         shipping.setState("Entregado al correo");
                     }
-                    if(statusNew.equals("cancelled ")){
+                    if(statusNew.equals("cancelled")){
                         shipping.setState("Cancelado");   
                     }
                 }
@@ -42,7 +42,7 @@ public class ShippingService {
                     if(statusNew.equals("inTravel")){
                         shipping.setState("En camino");
                     }
-                    if(statusNew.equals("cancelled ")){
+                    if(statusNew.equals("cancelled")){
                         shipping.setState("Cancelado");         
                     }
                 }
