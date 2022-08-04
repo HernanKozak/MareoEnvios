@@ -2,7 +2,8 @@ package com.example.demo1.models;
 
 import java.util.List;
 
-public class ShippingAndProductModel{
+//Model created for including a shipping and all of its products info and amounts
+public class ShippingAndProductModel{ 
     private ShippingModel shipping;
     private List<ProductModel> products;
     private List<Integer> productsAmount;

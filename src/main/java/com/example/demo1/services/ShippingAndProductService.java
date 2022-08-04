@@ -10,6 +10,8 @@ import com.example.demo1.models.ShippingAndProductModel;
 import com.example.demo1.models.ShippingItemModel;
 import com.example.demo1.models.ShippingModel;
 
+//This service was created to keep the "original" services (the ones related to existing Models) as 
+//simple as posible. 
 @Service
 public class ShippingAndProductService {
 
@@ -31,6 +33,8 @@ public class ShippingAndProductService {
             List<ShippingItemModel> shippingItem = shippingItemService.getShippingItemByShippingId(id);
             List<Integer> productsAmount = new ArrayList<Integer>();
             List<ProductModel> products = new ArrayList<ProductModel>();
+
+            //Looping through the shippingItem list it adds all products related
             for(ShippingItemModel item: shippingItem){
                 productsAmount.add(item.getProduct_count());
                 Optional<ProductModel> productOp = productService.getProductById(item.getProduct_id());
@@ -42,14 +46,17 @@ public class ShippingAndProductService {
             shippingProducts.setProductsAmount(productsAmount);
             return shippingProducts;
         }
-        return null;
+        return null; //It returns null if there was no shipping with the id specified
     }
 
     public List<TopSentModel> getTopSentProducts(int n){
         HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
         List<ShippingItemModel> shippingItems = shippingItemService.getAllShippingItem();
+
+        //Looping through shippingItems this set the amount to the contain value if it's the first
+        //product with that id to enter. Otherwise it sums the previous value to the new one
         for(ShippingItemModel item : shippingItems){
-            if(map.putIfAbsent(item.getProduct_id(), item.getProduct_count()) != null){
+            if(map.putIfAbsent(item.getProduct_id(), item.getProduct_count()) != null){  
                 int previousValue = map.get(item.getProduct_id());
                 map.put(item.getProduct_id(), previousValue + item.getProduct_count());
             }
@@ -62,11 +69,12 @@ public class ShippingAndProductService {
         Queue<Map.Entry<Integer, Integer>> queue = new PriorityQueue<>((a,b) -> {return a.getValue()-b.getValue();});
         for(Map.Entry<Integer, Integer> e: map.entrySet()){
             queue.add(e);
-            if(queue.size() > n){
-                queue.poll();
+            if(queue.size() > n){ //once the number of elements is exceded the littlest is poll off
+                queue.poll();  
             }
         }
 
+        //A Queue was used instead of sorting the List to keep the method more efficient
         while(!queue.isEmpty()){
             Map.Entry<Integer, Integer> topSentEntry =  queue.poll();
             int idProduct = topSentEntry.getKey();

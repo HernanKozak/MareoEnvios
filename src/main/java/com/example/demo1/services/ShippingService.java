@@ -29,7 +29,10 @@ public class ShippingService {
         if(shippingOp.isPresent()){
             ShippingModel shipping = shippingOp.get();
             String statusOriginal = shipping.getState();
-            if(!statusOriginal.equals("Entregado") && !statusOriginal.equals("Cancelado")){ //if it is with any of these status there is no possible transition
+            //If the status is "Entregado" or "Cancelado" there is no possible transition so nothing to make.
+            if(!statusOriginal.equals("Entregado") && !statusOriginal.equals("Cancelado")){
+
+                //Inside each status if it asks of every possible transition. If the one recieved is not possible nothing to do.
                 if(statusOriginal.equals("Inicial")){
                     if(statusNew.equals("sendToMail")){
                         shipping.setState("Entregado al correo");

@@ -15,6 +15,7 @@ public class ShippingItemService {
     @Autowired
     ShippingItemRepository shippingItemRepository;
 
+    //returns a list of all shippingItems with a given ShippingID
     public List<ShippingItemModel> getShippingItemByShippingId(Integer idShipping){
         List<ShippingItemModel> shippingItemsList = new ArrayList<ShippingItemModel>();
         Iterable<ShippingItemModel> allShippingItems = this.shippingItemRepository.findAll();

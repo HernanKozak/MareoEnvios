@@ -1,5 +1,7 @@
 package com.example.demo1.models;
 
+
+//Model created to store a Product description and its total amount sent
 public class TopSentModel {
     private Integer amount;
     private String description;
